@@ -85,10 +85,12 @@ class ImportRIP(bpy.types.Operator, ImportHelper):
          ripFilesFinal = ripFiles
          
       for rip in ripFilesFinal:
+         try:
             mesh = RipMesh(rip)
             mesh.loadMaterial(self.reuseMats, self.importShaders)
             mesh.loadRip()
-
+         except:
+            continue
       return {'FINISHED'}
 
 def menu_func_import(self, context):
